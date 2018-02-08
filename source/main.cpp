@@ -274,17 +274,19 @@ int main(int argc, char *argv[])
 				{
 					// Toggle full-screen mode. This will generate a window size
 					// change event, so no need to adjust the viewport here.
-
 					static time_t lastChanged = 0;
 					const time_t now = time(NULL);
-					isFullscreen = !isFullscreen;
-					if(!isFullscreen && now > lastChanged)
+					if(isFullscreen && now > lastChanged)
 					{
+						isFullscreen = false;
 						SDL_SetWindowFullscreen(window, 0);
 						SDL_SetWindowSize(window, windowWidth, windowHeight);
 					}
 					else
+					{
+						isFullscreen = true;
 						SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+					}
 					lastChanged = now;
 				}
 				else if(activeUI.Handle(event))
