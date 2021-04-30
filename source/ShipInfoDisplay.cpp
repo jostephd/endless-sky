@@ -327,6 +327,30 @@ void ShipInfoDisplay::UpdateAttributes(const Ship &ship, const Depreciation &dep
 	tableLabels.push_back("max:");
 	energyTable.push_back(Format::Number(maxEnergy));
 	heatTable.push_back(Format::Number(maxHeat));
+
+	attributesHeight += 20;
+	tableLabels.push_back("headroom:");
+	energyTable.push_back(Format::Number(
+				// ignore maxEnergy
+				60. * (
+					idleEnergyPerFrame
+					 - movingEnergyPerFrame
+					 - firingEnergy
+					 - (shieldEnergy + hullEnergy)
+				)
+				));
+	// TODO(josteph): probably incorrect; see #3704 #3835 #4215 etc
+	//                e.g., https://github.com/endless-sky/endless-sky/pull/3704#issuecomment-385273226
+	heatTable.push_back(Format::Number(
+				maxHeat -
+				60. * (
+					idleHeatPerFrame
+					 + movingHeatPerFrame
+					 + firingHeat
+					 + (shieldHeat + hullHeat)
+				)
+				));
+
 	// Pad by 10 pixels on the top and bottom.
 	attributesHeight += 30;
 }

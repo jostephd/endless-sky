@@ -431,6 +431,9 @@ tip "charging shields:"
 tip "max:"
 	`Energy storage capacity and maximum safe level for heat generation. Energy capacity allows a ship to temporarily draw more energy than it produces. The heat maximum is the highest your heat generation can be without eventually causing your ship to overheat.`
 
+tip "headroom:"
+	`For energy, how much energy generation exceeds energy consumption. For heat, how much maximal heat dissipation exceeds heat generation. The higher the values, the better.`
+
 
 
 # Outfit categories:
